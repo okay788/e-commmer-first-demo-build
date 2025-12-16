@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import heroImage from '@assets/stock_images/artisan_hands_workin_2247e338.jpg';
+import heroImage from '@assets/stock_images/woman_artist_paintin_425e9970.jpg';
 import { motion } from "framer-motion";
 
 export default function Hero() {
