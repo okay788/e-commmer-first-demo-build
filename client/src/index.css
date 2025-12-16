@@ -37,42 +37,42 @@
   --color-input: hsl(var(--input));
   --color-ring: hsl(var(--ring));
   
-  --font-sans: "Montserrat", sans-serif;
+  --font-sans: "Inter", sans-serif;
   --font-serif: "Playfair Display", serif;
   
   --radius: 0.5rem;
 }
 
 :root {
-  /* Soft Neutral / Ivory Theme */
+  /* Soft Neutral / Ivory Theme - Adjusted for Better Contrast */
   --background: 40 20% 98%;
-  --foreground: 30 10% 20%;
+  --foreground: 0 0% 10%; /* Darker black for better readability */
 
   --card: 0 0% 100%;
-  --card-foreground: 30 10% 20%;
+  --card-foreground: 0 0% 10%;
 
   --popover: 0 0% 100%;
-  --popover-foreground: 30 10% 20%;
+  --popover-foreground: 0 0% 10%;
 
   /* Earthy Clay/Gold */
   --primary: 28 35% 45%;
   --primary-foreground: 40 20% 98%;
 
   /* Soft Beige */
-  --secondary: 35 30% 90%;
-  --secondary-foreground: 30 10% 20%;
+  --secondary: 35 30% 92%;
+  --secondary-foreground: 0 0% 10%;
 
-  --muted: 35 20% 94%;
-  --muted-foreground: 30 5% 45%;
+  --muted: 35 15% 94%;
+  --muted-foreground: 0 0% 35%; /* Darker gray for better readability */
 
   --accent: 35 30% 90%;
-  --accent-foreground: 30 10% 20%;
+  --accent-foreground: 0 0% 10%;
 
   --destructive: 0 84% 60%;
   --destructive-foreground: 0 0% 98%;
 
-  --border: 35 15% 85%;
-  --input: 35 15% 85%;
+  --border: 35 10% 80%; /* Slightly darker border */
+  --input: 35 10% 80%;
   --ring: 28 35% 45%;
 }
 

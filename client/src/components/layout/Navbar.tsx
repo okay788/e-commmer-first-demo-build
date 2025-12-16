@@ -9,12 +9,14 @@ export default function Navbar() {
   const [location, setLocation] = useLocation();
   const [searchQuery, setSearchQuery] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+  const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
       setLocation(`/search?q=${encodeURIComponent(searchQuery)}`);
       setIsOpen(false);
+      setIsMobileSearchOpen(false);
     }
   };
 
@@ -41,8 +43,8 @@ export default function Navbar() {
   return (
     <nav className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-        {/* Mobile Menu */}
-        <div className="md:hidden">
+        {/* Mobile Menu & Logo */}
+        <div className="flex items-center gap-2 md:hidden">
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" className="-ml-2">
@@ -53,29 +55,23 @@ export default function Navbar() {
             <SheetContent side="left" className="w-[300px] sm:w-[400px]">
               <div className="flex flex-col gap-8 mt-8">
                 <Link href="/" onClick={() => setIsOpen(false)} className="font-serif text-2xl font-bold">Artisan</Link>
-                <form onSubmit={handleSearch} className="relative">
-                  <Input 
-                    placeholder="Search..." 
-                    className="pl-8" 
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                  />
-                  <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-                </form>
                 <div className="flex flex-col gap-4">
                   <NavLinks />
                 </div>
               </div>
             </SheetContent>
           </Sheet>
+          
+          <Link href="/" className="flex items-center space-x-2">
+            <span className="font-serif text-xl font-bold">
+              Artisan
+            </span>
+          </Link>
         </div>
 
-        {/* Logo */}
-        <Link href="/" className="mr-6 flex items-center space-x-2">
-          <span className="hidden font-serif text-2xl font-bold sm:inline-block">
-            Artisan
-          </span>
-          <span className="font-serif text-xl font-bold sm:hidden">
+        {/* Desktop Logo */}
+        <Link href="/" className="hidden md:flex items-center space-x-2 mr-6">
+          <span className="font-serif text-2xl font-bold">
             Artisan
           </span>
         </Link>
@@ -87,6 +83,7 @@ export default function Navbar() {
 
         {/* Actions */}
         <div className="flex items-center gap-2">
+          {/* Desktop Search */}
           <form onSubmit={handleSearch} className="hidden md:relative md:block w-full max-w-sm">
              <Input 
                 placeholder="Search products..." 
@@ -97,6 +94,17 @@ export default function Navbar() {
             <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
           </form>
 
+          {/* Mobile Search Toggle */}
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            className="md:hidden"
+            onClick={() => setIsMobileSearchOpen(!isMobileSearchOpen)}
+          >
+            <Search className="h-5 w-5" />
+            <span className="sr-only">Search</span>
+          </Button>
+
           <Button variant="ghost" size="icon" className="relative" onClick={() => setLocation('/cart')}>
             <ShoppingBag className="h-5 w-5" />
             <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-primary text-[10px] font-medium text-primary-foreground flex items-center justify-center">
@@ -106,6 +114,22 @@ export default function Navbar() {
           </Button>
         </div>
       </div>
+
+      {/* Mobile Search Bar (Expandable) */}
+      {isMobileSearchOpen && (
+        <div className="md:hidden border-t px-4 py-3 bg-background animate-in slide-in-from-top-2">
+          <form onSubmit={handleSearch} className="relative">
+            <Input 
+              autoFocus
+              placeholder="Search products..." 
+              className="pl-8 w-full" 
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+          </form>
+        </div>
+      )}
     </nav>
   );
 }
