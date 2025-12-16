@@ -7,7 +7,7 @@ import { ArrowRight } from "lucide-react";
 export default function Hero() {
   return (
     <div className="relative w-full overflow-hidden bg-[#FAF9F6]">
-      <div className="container mx-auto px-4 py-16 md:py-24 lg:py-32">
+      <div className="container mx-auto px-4 py-12 md:py-16 lg:py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           
           <motion.div 
@@ -64,7 +64,7 @@ export default function Hero() {
             transition={{ duration: 1, delay: 0.2 }}
             className="relative"
           >
-            <div className="relative aspect-[4/5] md:aspect-square lg:aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl">
+            <div className="relative aspect-[4/3] md:aspect-[4/3] lg:aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
               <img 
                 src={heroImage} 
                 alt="Artisan working" 
