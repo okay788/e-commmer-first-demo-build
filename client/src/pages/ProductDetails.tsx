@@ -29,7 +29,7 @@ export default function ProductDetails() {
 
   const relatedProducts = products
     .filter(p => p.category === product.category && p.id !== product.id)
-    .slice(0, 4);
+    .slice(0, 5);
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
@@ -132,7 +132,7 @@ export default function ProductDetails() {
           {relatedProducts.length > 0 && (
             <div className="pt-8 border-t">
               <h2 className="text-2xl font-serif mb-8">You May Also Like</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                 {relatedProducts.map((p) => (
                   <ProductCard key={p.id} product={p} />
                 ))}

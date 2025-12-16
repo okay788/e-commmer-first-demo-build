@@ -13,7 +13,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   return (
     <Link href={`/product/${product.id}`}>
       <motion.div
-        whileHover={{ y: -5 }}
+        whileHover={{ y: -3 }}
         transition={{ type: "spring", stiffness: 300 }}
         className="group cursor-pointer h-full"
       >
@@ -22,28 +22,28 @@ export default function ProductCard({ product }: ProductCardProps) {
             <img
               src={product.image}
               alt={product.name}
-              className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110"
+              className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105"
             />
             {product.isNew && (
-              <Badge className="absolute top-3 left-3 bg-white/90 text-primary hover:bg-white" variant="secondary">
+              <Badge className="absolute top-2 left-2 bg-white/90 text-primary hover:bg-white text-[10px] px-1.5 py-0.5 h-5" variant="secondary">
                 New
               </Badge>
             )}
             {product.isPopular && (
-              <Badge className="absolute top-3 right-3 bg-primary/90 text-primary-foreground hover:bg-primary">
-                Bestseller
+              <Badge className="absolute top-2 right-2 bg-primary/90 text-primary-foreground hover:bg-primary text-[10px] px-1.5 py-0.5 h-5">
+                Best
               </Badge>
             )}
             
-            <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-              <Button variant="secondary" className="translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                View Details
+            <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4">
+              <Button size="sm" variant="secondary" className="w-[90%] translate-y-2 group-hover:translate-y-0 transition-transform duration-300 opacity-0 group-hover:opacity-100 text-xs h-8">
+                Quick View
               </Button>
             </div>
           </CardContent>
-          <CardFooter className="flex flex-col items-start p-4 space-y-1">
-            <span className="text-xs text-muted-foreground uppercase tracking-wider">{product.category}</span>
-            <h3 className="font-medium text-base leading-tight group-hover:text-primary transition-colors">
+          <CardFooter className="flex flex-col items-start p-2.5 space-y-0.5">
+            <span className="text-[10px] text-muted-foreground uppercase tracking-wider truncate w-full">{product.category}</span>
+            <h3 className="font-medium text-sm leading-tight group-hover:text-primary transition-colors line-clamp-1 w-full">
               {product.name}
             </h3>
             <p className="text-sm font-semibold">${product.price}</p>

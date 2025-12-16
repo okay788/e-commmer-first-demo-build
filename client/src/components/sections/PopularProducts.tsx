@@ -5,7 +5,7 @@ import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
 
 export default function PopularProducts() {
-  const popularProducts = products.filter(p => p.isPopular).slice(0, 4);
+  const popularProducts = products.filter(p => p.isPopular).slice(0, 10); // Show more popular products
 
   return (
     <section className="py-16 md:py-24 bg-secondary/30">
@@ -23,7 +23,7 @@ export default function PopularProducts() {
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
           {popularProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
