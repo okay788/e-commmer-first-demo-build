@@ -1,0 +1,202 @@
+E-Commerce Frontend Design Requirement (Detailed)
+Project Overview
+
+Design and develop a beautiful, modern e-commerce frontend for a handcrafted products brand. The platform will showcase authentic, carefully handcrafted items, highlighting craftsmanship, tradition, and premium quality.
+The overall experience should feel clean, elegant, light, and emotionally engaging, encouraging users to explore and shop with ease.
+
+Product Categories
+
+The platform will sell products under four broad categories:
+
+Jewelry (Handmade)
+
+Handcrafted necklaces, earrings, bangles, rings
+
+Traditional and contemporary designs
+
+Focus on detailing, texture, and materials
+
+Clothing (Handmade Embroidery Work)
+
+Hand-embroidered dresses, kurtis, sarees, dupattas
+
+Show close-up embroidery details
+
+Emphasize craftsmanship and uniqueness
+
+Wedding Accessories
+
+Bridal jewelry, hair accessories, clutches, handcrafted footwear
+
+Premium and festive feel
+
+Elegant and luxurious presentation
+
+Handcrafted Home Décor & More
+
+Handmade wall art, lamps, vases, cushions, showpieces
+
+Earthy tones and aesthetic lifestyle visuals
+
+Clearly mention that all items are carefully handcrafted
+
+Design & UI Theme
+Visual Style
+
+Light theme with soft neutral colors (ivory, beige, pastel tones)
+
+Modern, minimal UI with elegant typography
+
+Plenty of white space for a premium feel
+
+High-quality product cards with subtle shadows and rounded corners
+
+Typography
+
+Clean sans-serif fonts for readability
+
+Slightly artistic font for headings (to reflect handcrafted nature)
+
+Animations & Motion
+
+Use smooth, tasteful animations (not flashy)
+
+Micro-interactions:
+
+Hover animations on product cards
+
+Smooth image zoom on hover
+
+Fade-in / slide-up animations on scroll
+
+Page transitions should feel fluid and natural
+
+Motion should enhance usability, not distract
+
+Tech Requirements
+
+Frontend built using React (via CDN)
+
+No heavy frameworks required initially
+
+Use lightweight animation libraries or CSS animations
+
+Fully responsive (mobile, tablet, desktop)
+
+Core Pages & Features
+1. Landing Page (Homepage)
+
+The landing page should be highly user-friendly and instantly communicate the brand’s value.
+
+Key Sections:
+
+Hero section with a soft banner image and tagline
+Example: “Carefully Handcrafted with Love”
+
+Category preview section (4 categories shown as cards)
+
+Popular products section (best sellers / trending)
+
+“Why Choose Us” section:
+
+100% Handmade
+
+Unique designs
+
+Crafted with care
+
+Call-to-action buttons:
+
+“Explore Collection”
+
+“Shop Handmade”
+
+Users should be able to understand the entire inventory at a glance without scrolling too much.
+
+2. Product Listing Page
+
+Grid-based product layout
+
+Filters:
+
+Category
+
+Price range
+
+Popular / New arrivals
+
+Clean product cards:
+
+Image
+
+Product title
+
+Short description
+
+Price
+
+3. Search Page (Advanced Search)
+
+Powerful search functionality
+
+Users can search by:
+
+Product title
+
+Product description
+
+Category
+
+Keywords (e.g., “handmade necklace”, “wedding decor”)
+
+Instant search suggestions
+
+Highlight matching keywords in results
+
+4. Product Details Page
+
+Large product images with zoom
+
+Description highlighting:
+
+Handmade process
+
+Materials used
+
+Care instructions
+
+Category and related products
+
+Add to cart / wishlist buttons
+
+Dummy Data Requirement
+
+Add dummy products for all categories for display purposes
+
+Each dummy product should include:
+
+Product image (placeholder)
+
+Name
+
+Short handcrafted description
+
+Price
+
+Category tag
+
+At least:
+
+6–8 products per category
+
+4–6 popular products on the homepage
+
+User Experience Goals
+
+Easy navigation with minimal clicks
+
+Clear focus on craftsmanship and authenticity
+
+Visually calming yet premium experience
+
+Fast loading and smooth interactions
