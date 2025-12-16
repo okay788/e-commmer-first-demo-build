@@ -1,15 +1,18 @@
 import { Link, useLocation } from "wouter";
 import { ShoppingBag, Search, Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Input } from "@/components/ui/input";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
   const [location, setLocation] = useLocation();
   const [searchQuery, setSearchQuery] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
+  const [isSearchExpanded, setIsSearchExpanded] = useState(false);
+  const searchInputRef = useRef<HTMLInputElement>(null);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -17,7 +20,14 @@ export default function Navbar() {
       setLocation(`/search?q=${encodeURIComponent(searchQuery)}`);
       setIsOpen(false);
       setIsMobileSearchOpen(false);
+      setIsSearchExpanded(false);
+      searchInputRef.current?.blur();
     }
+  };
+
+  const closeSearch = () => {
+    setIsSearchExpanded(false);
+    setSearchQuery("");
   };
 
   const NavLinks = () => (
@@ -69,30 +79,70 @@ export default function Navbar() {
           </Link>
         </div>
 
-        {/* Desktop Logo */}
-        <Link href="/" className="hidden md:flex items-center space-x-2 mr-6">
-          <span className="font-serif text-2xl font-bold">
-            Artisan
-          </span>
-        </Link>
+        {/* Desktop Logo - Hide when search is expanded */}
+        <AnimatePresence>
+          {!isSearchExpanded && (
+            <motion.div 
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20, transition: { duration: 0.2 } }}
+              className="hidden md:flex items-center space-x-2 mr-6"
+            >
+              <Link href="/">
+                <span className="font-serif text-2xl font-bold whitespace-nowrap">
+                  Artisan
+                </span>
+              </Link>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
-        {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-6">
-          <NavLinks />
-        </div>
+        {/* Desktop Nav - Hide when search is expanded */}
+        <AnimatePresence>
+          {!isSearchExpanded && (
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0, transition: { duration: 0.2 } }}
+              className="hidden md:flex items-center gap-6"
+            >
+              <NavLinks />
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Actions */}
-        <div className="flex items-center gap-2">
-          {/* Desktop Search */}
-          <form onSubmit={handleSearch} className="hidden md:relative md:block w-full max-w-sm">
-             <Input 
-                placeholder="Search products..." 
-                className="pl-8 w-[200px] focus:w-[300px] transition-all duration-300" 
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-          </form>
+        <div className={`flex items-center gap-2 ${isSearchExpanded ? 'flex-1 justify-end' : ''}`}>
+          {/* Desktop Search - Expanding */}
+          <motion.form 
+            layout
+            onSubmit={handleSearch} 
+            className={`hidden md:relative md:flex items-center transition-all duration-300 ease-in-out ${isSearchExpanded ? 'w-full ml-4' : 'w-auto'}`}
+          >
+             <div className={`relative ${isSearchExpanded ? 'w-full' : 'w-auto'}`}>
+               <Input 
+                  ref={searchInputRef}
+                  placeholder="Search products..." 
+                  className={`pl-8 transition-all duration-300 ${isSearchExpanded ? 'w-full' : 'w-[200px] hover:w-[250px]'}`}
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onFocus={() => setIsSearchExpanded(true)}
+                />
+                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                
+                {isSearchExpanded && (
+                  <Button 
+                    type="button" 
+                    variant="ghost" 
+                    size="icon" 
+                    className="absolute right-1 top-1 h-7 w-7 text-muted-foreground hover:text-foreground"
+                    onClick={closeSearch}
+                  >
+                    <X className="h-4 w-4" />
+                  </Button>
+                )}
+             </div>
+          </motion.form>
 
           {/* Mobile Search Toggle */}
           <Button 
@@ -105,7 +155,7 @@ export default function Navbar() {
             <span className="sr-only">Search</span>
           </Button>
 
-          <Button variant="ghost" size="icon" className="relative" onClick={() => setLocation('/cart')}>
+          <Button variant="ghost" size="icon" className="relative shrink-0" onClick={() => setLocation('/cart')}>
             <ShoppingBag className="h-5 w-5" />
             <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-primary text-[10px] font-medium text-primary-foreground flex items-center justify-center">
               0
