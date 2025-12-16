@@ -4,9 +4,9 @@
   "type": "module",
   "license": "MIT",
 "scripts": {
-  "dev": "vite dev --port 5000",
+  "dev": "vite dev",
   "build": "vite build",
-  "start": "vite preview --port 5000",
+  "start": "vite preview",
   "check": "tsc"
 },
   "dependencies": {
