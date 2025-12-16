@@ -1,6 +1,6 @@
 import { Link, useLocation } from "wouter";
 import { ShoppingBag, Search, Menu, X } from "lucide-react";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Input } from "@/components/ui/input";
@@ -13,6 +13,23 @@ export default function Navbar() {
   const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
   const [isSearchExpanded, setIsSearchExpanded] = useState(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
+  const searchContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (searchContainerRef.current && !searchContainerRef.current.contains(event.target as Node)) {
+        closeSearch();
+      }
+    }
+
+    if (isSearchExpanded) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isSearchExpanded]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -63,7 +80,7 @@ export default function Navbar() {
               transition={{ duration: 0.2, ease: "easeInOut" }}
               className="absolute inset-0 z-50 flex items-center px-4 bg-background/95 backdrop-blur-md"
             >
-              <form onSubmit={handleSearch} className="w-full flex items-center gap-2 max-w-3xl mx-auto">
+              <form ref={searchContainerRef} onSubmit={handleSearch} className="w-full flex items-center gap-2 max-w-3xl mx-auto">
                 <div className="relative flex-1">
                   <Input 
                     autoFocus
